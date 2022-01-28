@@ -16,12 +16,21 @@ function TransactionDetails() {
       .catch(() => {
         navigate("/not-found");
       });
+
+    fetch(`${process.env.REACT_APP_API_URL}/transactions/${index}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTransaction(data);
+      })
+      .catch(() => {
+        navigate("/not-found");
+      });
   }, [index]);
   const handleDelete = () => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/transactions/${index}`)
       .then((res) => {
-        navigate("transactions");
+        navigate("/transactions");
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +40,7 @@ function TransactionDetails() {
     <article>
       <h5>
         <span>
-          <a href={transaction.url}>{transaction.name}</a>
+          <a href={transaction.url}>{transaction.trans}</a>
         </span>{" "}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {transaction.url}
@@ -39,6 +48,12 @@ function TransactionDetails() {
       <h6>{transaction.category}</h6>
       <p>{transaction.description}</p>
       <div className="showNavigation">
+        <div>
+          {" "}
+          <Link to={`/transactions`}>
+            <button>Back</button>
+          </Link>
+        </div>
         <div>
           {" "}
           <Link to={`/transactions/${index}/edit`}>

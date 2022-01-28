@@ -90,7 +90,7 @@ function TransactionEditForm() {
           type="text"
           name="category"
           value={transaction.category}
-          placeholder="Groceries, Household..."
+          placeholder="Groceries, Household, ..."
           onChange={handleTextChange}
         />
         <label htmlFor="description">Description:</label>
@@ -110,7 +110,14 @@ function TransactionEditForm() {
           placeholder="#"
           onChange={handleTextChange}
         />
+        <br />
+        <input type="submit" />
       </form>
+      <Link to={`/transactions/${index}`}>
+        <button>Cancel!</button>
+      </Link>
     </div>
   );
 }
+
+export default TransactionEditForm;
