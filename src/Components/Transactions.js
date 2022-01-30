@@ -16,17 +16,6 @@ function Transactions() {
       .catch((err) => {
         throw err;
       });
-
-    // fetch(API_URL + "/transactions")
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     setTransactions(data);
-    //   })
-    //   .catch((err) => {
-    //     throw err;
-    //   });
   }, []);
 
   return (
@@ -37,7 +26,6 @@ function Transactions() {
             <tr>
               <th></th>
               <th>Take me there</th>
-              <th>View this transaction</th>
             </tr>
           </thead>
           <tbody>

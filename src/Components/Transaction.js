@@ -8,6 +8,8 @@ function Transaction({ transaction, index }) {
           {transaction.trans}
         </a>
       </td>
+      <td>{transaction.date}</td>
+      <td>{transaction.amount}</td>
       <td>
         <Link to={`/transactions/${index}`}>✏️</Link>
       </td>

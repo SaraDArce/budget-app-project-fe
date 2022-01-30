@@ -10,7 +10,7 @@ function TransactionEditForm() {
   const [transaction, setTransaction] = useState({
     date: "",
     trans: "",
-    amount: Number,
+    amount: 0,
     type: "",
     category: "",
     description: "",
@@ -50,13 +50,15 @@ function TransactionEditForm() {
   return (
     <div className="Edit">
       <form onSubmit={handleSubmit}>
-        {/* <div>
-          <DatePicker
-            selected={date}
-            onSelect={handleDateSelect} //when day is clicked
-            onChange={handleDateChange} //only when value has changed
-          />
-        </div> */}
+        <label htmlFor="date">Date:</label>
+        <input
+          id="date"
+          type="date"
+          name="date"
+          value={transaction.date}
+          placeholder="Enter Date"
+          onChange={handleTextChange}
+        />
         <label htmlFor="trans">Trans:</label>
         <input
           id="trans"

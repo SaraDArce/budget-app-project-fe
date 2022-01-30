@@ -4,25 +4,47 @@ import { useNavigate } from "react-router-dom";
 
 function TransactionNewForm() {
   const [transaction, setTransaction] = useState({
-    //  date:
     trans: "",
-    amount: Number,
+    date: "",
+    amount: null,
     type: "",
     category: "",
     description: "",
     tags: "",
   });
 
-  const navigate = useNavigate;
+  const dateNum = (Str) => {
+    const monthArr = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
-  const handleTextChange = (ev) => {
-    setTransaction({ ...transaction, [ev.target.id]: ev.target.value });
+    const newMonthArr = Str.split("-");
+    return monthArr[Number(newMonthArr[1]) - 1] + " " + newMonthArr[2];
   };
 
-  const handleSubmit = () => {
-    ev.preventDefault();
+  const navigate = useNavigate();
+
+  const handleTextChange = (event) => {
+    setTransaction({ ...transaction, [event.target.id]: event.target.value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newTransDate = { ...transaction, date: dateNum(transaction.date) };
+
     axios
-      .post(`${process.env.REACT_APP_API_URL}/transactions`, transaction)
+      .post(`${process.env.REACT_APP_API_URL}/transactions`, newTransDate)
       .then((res) => {
         navigate("/transactions");
       })
@@ -31,7 +53,7 @@ function TransactionNewForm() {
       });
   };
   return (
-    <div className="New">
+    <div className="newtrans">
       <form onSubmit={handleSubmit}>
         <label htmlFor="trans">Trans:</label>
         <input
@@ -40,6 +62,15 @@ function TransactionNewForm() {
           type="text"
           onChange={handleTextChange}
           placeholder="Transaction"
+          required
+        />
+        <label htmlFor="date">Date:</label>
+        <input
+          id="date"
+          value={transaction.date}
+          type="date"
+          onChange={handleTextChange}
+          placeholder="Date"
           required
         />
         <label htmlFor="amount">Amount:</label>
@@ -89,9 +120,6 @@ function TransactionNewForm() {
         <br />
         <input type="submit" />
       </form>
-      <Link to={`/transactions/${index}`}>
-        <button>Cancel!</button>
-      </Link>
     </div>
   );
 }

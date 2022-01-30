@@ -16,15 +16,6 @@ function TransactionDetails() {
       .catch(() => {
         navigate("/not-found");
       });
-
-    fetch(`${process.env.REACT_APP_API_URL}/transactions/${index}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTransaction(data);
-      })
-      .catch(() => {
-        navigate("/not-found");
-      });
   }, [index]);
   const handleDelete = () => {
     axios
@@ -38,15 +29,17 @@ function TransactionDetails() {
   };
   return (
     <article>
-      <h5>
+      <h3>
         <span>
           <a href={transaction.url}>{transaction.trans}</a>
         </span>{" "}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {transaction.url}
-      </h5>
-      <h6>{transaction.category}</h6>
-      <p>{transaction.description}</p>
+      </h3>
+      <h4>{transaction.category}</h4>
+      <br></br>
+      <h4>{transaction.description}</h4>
+      <br></br>
       <div className="showNavigation">
         <div>
           {" "}
