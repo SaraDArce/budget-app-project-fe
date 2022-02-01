@@ -23,7 +23,7 @@ function Transactions() {
 
   const handleTotal = (transactionsArr) => {
     let bal = transactionsArr
-      .map((transaction) => transaction.amount)
+      .map((transaction) => Number(transaction.amount))
       .reduce((a, b) => a + b, 0);
     setTotal(bal);
   };
